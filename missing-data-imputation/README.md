@@ -1,6 +1,6 @@
 # Missing Data Imputation Comparison
 
-Companion code for [KDN 5: We Tried 5 Missing Data Imputation Methods — The Simplest Method Won (Sort Of)](#).
+Companion code for an upcoming article (expected January 2026).
 
 ## Overview
 
