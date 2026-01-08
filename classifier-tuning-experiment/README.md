@@ -1,6 +1,6 @@
 # Classifier Tuning Experiment
 
-Companion code for the article "We Tuned 4 Classifiers on the Same Dataset — None Improved".
+Companion code for an upcoming article (expected January 2026).
 
 ## Overview
 
