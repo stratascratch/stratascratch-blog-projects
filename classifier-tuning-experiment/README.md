@@ -1,6 +1,6 @@
 # Classifier Tuning Experiment
 
-Companion code for [KDN 4: We Tuned 4 Classifiers on the Same Dataset — None Improved](#).
+Companion code for the article "We Tuned 4 Classifiers on the Same Dataset — None Improved".
 
 ## Overview
 
