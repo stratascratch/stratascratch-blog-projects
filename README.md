@@ -13,8 +13,8 @@ Each folder contains:
 
 | Project | Article |
 |---------|---------|
-| `classifier-tuning-experiment/` | [KDN 4: We Tuned 4 Classifiers on the Same Dataset: None Improved](#) |
-| `missing-data-imputation/` | [KDN 5: We Tried 5 Missing Data Imputation Methods: The Simplest Method Won (Sort Of)](#) |
+| `classifier-tuning-experiment/` | We Tuned 4 Classifiers on the Same Dataset: None Improved |
+| `missing-data-imputation/` | We Tried 5 Missing Data Imputation Methods: The Simplest Method Won (Sort Of) |
 
 ## Getting Started
 
