@@ -1,0 +1,100 @@
+-- Drop tables if they already exist
+DROP TABLE IF EXISTS support_tickets;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS users;
+
+-- Create tables
+CREATE TABLE users (
+    user_id BIGINT PRIMARY KEY,
+    signup_date DATE,
+    country TEXT
+);
+
+CREATE TABLE sessions (
+    user_id BIGINT,
+    session_date DATE
+);
+
+CREATE TABLE orders (
+    user_id BIGINT,
+    order_date DATE,
+    order_amount BIGINT
+);
+
+CREATE TABLE support_tickets (
+    user_id BIGINT,
+    created_at TIMESTAMP
+);
+
+-- Insert data into users
+INSERT INTO users (user_id, signup_date, country) VALUES
+    (101, DATE '2024-05-12', 'US'),
+    (102, DATE '2024-07-03', 'CA'),
+    (103, DATE '2024-11-20', 'US'),
+    (104, DATE '2024-03-18', 'UK'),
+    (105, DATE '2024-12-28', 'US'),
+    (106, DATE '2024-08-09', 'DE'),
+    (107, DATE '2024-10-14', 'FR'),
+    (108, DATE '2025-01-05', 'US');
+
+-- Insert data into sessions
+INSERT INTO sessions (user_id, session_date) VALUES
+    (101, DATE '2024-11-05'),
+    (101, DATE '2024-11-17'),
+    (101, DATE '2024-12-02'),
+    (101, DATE '2024-12-18'),
+    (101, DATE '2025-01-08'),
+    (101, DATE '2025-01-29'),
+    (101, DATE '2025-02-07'),
+    (101, DATE '2025-02-21'),
+    (102, DATE '2024-11-11'),
+    (102, DATE '2024-12-09'),
+    (102, DATE '2025-01-04'),
+    (103, DATE '2024-12-01'),
+    (103, DATE '2024-12-20'),
+    (103, DATE '2025-01-10'),
+    (103, DATE '2025-02-15'),
+    (104, DATE '2024-11-07'),
+    (104, DATE '2024-11-25'),
+    (104, DATE '2024-12-19'),
+    (104, DATE '2025-01-12'),
+    (105, DATE '2025-01-03'),
+    (105, DATE '2025-01-19'),
+    (106, DATE '2024-11-03'),
+    (106, DATE '2024-11-15'),
+    (106, DATE '2024-12-06'),
+    (106, DATE '2024-12-28'),
+    (106, DATE '2025-01-16'),
+    (106, DATE '2025-02-10'),
+    (107, DATE '2024-11-09'),
+    (107, DATE '2024-12-14'),
+    (107, DATE '2025-01-30'),
+    (108, DATE '2025-01-07'),
+    (108, DATE '2025-01-20'),
+    (108, DATE '2025-02-05');
+
+-- Insert data into orders
+INSERT INTO orders (user_id, order_date, order_amount) VALUES
+    (101, DATE '2024-11-21', 35),
+    (101, DATE '2024-12-15', 60),
+    (101, DATE '2025-01-20', 45),
+    (102, DATE '2024-12-10', 20),
+    (103, DATE '2024-12-05', 25),
+    (103, DATE '2025-01-18', 30),
+    (104, DATE '2024-11-10', 80),
+    (104, DATE '2025-01-05', 55),
+    (105, DATE '2025-01-10', 15),
+    (106, DATE '2024-11-29', 40),
+    (106, DATE '2024-12-22', 50),
+    (107, DATE '2025-01-12', 22),
+    (108, DATE '2025-01-21', 18);
+
+-- Insert data into support_tickets
+INSERT INTO support_tickets (user_id, created_at) VALUES
+    (101, TIMESTAMP '2025-01-09 09:14:00'),
+    (102, TIMESTAMP '2025-01-17 15:40:00'),
+    (104, TIMESTAMP '2024-12-28 11:05:00'),
+    (104, TIMESTAMP '2025-01-25 16:22:00'),
+    (106, TIMESTAMP '2025-01-11 08:30:00'),
+    (107, TIMESTAMP '2025-01-29 13:00:00');
