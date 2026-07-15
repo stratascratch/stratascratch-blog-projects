@@ -1,0 +1,38 @@
+-- Creates and populates the product_categories table used in the
+-- Recursive CTE "Product Category Tree" use case.
+--
+-- Edge cases baked in:
+--   category_id 1, 2, 3 all have parent_category_id = NULL -> a forest of
+--   three roots (Electronics, Clothing, Home Goods), not a single tree
+--
+--   category_id 11 ('Smart Watches') and 12 ('Fitness Trackers') point at
+--   EACH OTHER as parent instead of both pointing to their real parent,
+--   'Wearables' (6) -> a genuine two-node cycle
+ 
+DROP TABLE IF EXISTS product_categories;
+ 
+CREATE TABLE product_categories (
+    category_id         INT PRIMARY KEY,
+    category_name       VARCHAR(50),
+    parent_category_id  INT
+);
+ 
+INSERT INTO product_categories (category_id, category_name, parent_category_id) VALUES
+(1,  'Electronics',        NULL),
+(2,  'Clothing',           NULL),
+(3,  'Home Goods',         NULL),
+(4,  'Computers',          1),
+(5,  'Phones',             1),
+(6,  'Wearables',          1),
+(7,  'Laptops',            4),
+(8,  'Desktops',           4),
+(9,  'Smartphones',        5),
+(10, 'Phone Accessories',  5),
+(11, 'Smart Watches',      12),
+(12, 'Fitness Trackers',   11),
+(13, 'Men''s Clothing',    2),
+(14, 'Women''s Clothing',  2),
+(15, 'Men''s Shoes',       13),
+(16, 'Men''s Shirts',      13),
+(17, 'Furniture',          3),
+(18, 'Kitchen',            3);
