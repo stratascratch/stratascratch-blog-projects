@@ -1,0 +1,39 @@
+-- Creates and populates the items table used in the
+-- Recursive CTE "Folder Structure Traversal" use case.
+--
+-- Edge cases baked in:
+--   photo2.jpg has size_kb = NULL   -> unknown size (corrupted metadata),
+--                                       silently excluded by SUM()
+--   backup.zip has size_kb = 0      -> a real, legitimately empty file,
+--                                       distinct from the NULL case above
+--   'Empty' folder has zero children of any kind
+--   'Archive' has no direct files, only a nested subfolder ('Old')
+--   files and folders share one table and one parent_id column
+
+DROP TABLE IF EXISTS items;
+
+CREATE TABLE items (
+    item_id    INT PRIMARY KEY,
+    item_name  VARCHAR(50),
+    item_type  VARCHAR(10),
+    parent_id  INT,
+    size_kb    INT
+);
+
+INSERT INTO items (item_id, item_name, item_type, parent_id, size_kb) VALUES
+(1,  'Projects',           'folder', NULL, NULL),
+(2,  'Documents',          'folder', 1,    NULL),
+(3,  'report.docx',        'file',   2,    120),
+(4,  'notes.txt',          'file',   2,    15),
+(5,  'Images',             'folder', 1,    NULL),
+(6,  'photo1.jpg',         'file',   5,    250),
+(7,  'photo2.jpg',         'file',   5,    NULL),
+(8,  'Archive',            'folder', 1,    NULL),
+(9,  'Old',                'folder', 8,    NULL),
+(10, 'backup.zip',         'file',   9,    0),
+(11, 'archive_notes.txt',  'file',   9,    45),
+(12, 'Videos',             'folder', 1,    NULL),
+(13, 'Empty',              'folder', 1,    NULL),
+(14, 'Drafts',             'folder', 12,   NULL),
+(15, 'draft1.mov',         'file',   14,   850),
+(16, 'draft2.mov',         'file',   14,   900);
