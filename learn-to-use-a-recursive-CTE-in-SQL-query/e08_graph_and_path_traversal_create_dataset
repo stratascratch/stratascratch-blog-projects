@@ -1,0 +1,29 @@
+-- Creates and populates the routes table used in the
+-- Recursive CTE "Graph and Path Traversal" use case.
+--
+-- Edge cases baked in:
+--   NYC -> CHI -> DEN -> NYC forms a genuine cycle in the graph itself,
+--   not a single self-referencing row -> a depth cap would eventually
+--   stop it, but only path-based cycle detection stops it correctly
+--   CHI -> LAX and DEN -> LAX form a diamond: LAX is reachable two
+--   different ways, testing that the result is de-duplicated
+--   PHX -> TUS is a disconnected component, unreachable from NYC
+--   MIA and SEA are dead ends with no outgoing routes of their own
+ 
+DROP TABLE IF EXISTS routes;
+ 
+CREATE TABLE routes (
+    route_id           INT PRIMARY KEY,
+    origin_city        VARCHAR(10),
+    destination_city   VARCHAR(10)
+);
+ 
+INSERT INTO routes (route_id, origin_city, destination_city) VALUES
+(1, 'NYC', 'CHI'),
+(2, 'CHI', 'DEN'),
+(3, 'DEN', 'NYC'),
+(4, 'NYC', 'MIA'),
+(5, 'CHI', 'LAX'),
+(6, 'DEN', 'LAX'),
+(7, 'LAX', 'SEA'),
+(8, 'PHX', 'TUS');
