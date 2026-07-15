@@ -1,0 +1,37 @@
+-- Creates and populates the employees table used in the
+-- Recursive CTE "Employee Hierarchy" use case.
+--
+-- Edge cases baked in:
+--   employee_id 1  (CEO) has a NULL manager_id      -> required anchor point
+--   employee_id 9  lists manager_id = 9 (self-ref)  -> tests cycle guards
+--   employee_id 14 has manager_id = 99, nonexistent -> orphaned row
+--   employee_id 6 and 12 share the name 'sarah kim' in different depts
+--   employee_id 8's name has trailing whitespace ('mike torres ')
+
+DROP TABLE IF EXISTS employees;
+
+CREATE TABLE employees (
+    employee_id   INT PRIMARY KEY,
+    employee_name VARCHAR(50),
+    manager_id    INT,
+    department    VARCHAR(50),
+    title         VARCHAR(50),
+    hire_date     DATE
+);
+
+INSERT INTO employees (employee_id, employee_name, manager_id, department, title, hire_date) VALUES
+(1,  'linda park',     NULL, 'executive',   'chief executive officer', '2015-03-01'),
+(2,  'james wu',       1,    'engineering', 'vp of engineering',       '2016-01-15'),
+(3,  'maria santos',   1,    'sales',       'vp of sales',             '2016-02-20'),
+(4,  'robert lee',     1,    'marketing',   'vp of marketing',         '2016-03-10'),
+(5,  'anna kowalski',  2,    'engineering', 'director of engineering', '2017-05-12'),
+(6,  'sarah kim',      2,    'engineering', 'engineering manager',     '2017-08-01'),
+(7,  'tom nguyen',     3,    'sales',       'sales manager',           '2017-09-15'),
+(8,  'mike torres ',   3,    'sales',       'account executive',       '2018-01-10'),
+(9,  'dave chen',      9,    'engineering', 'senior engineer',         '2018-03-20'),
+(10, 'emily zhang',    5,    'engineering', 'software engineer',       '2019-02-14'),
+(11, 'carlos ruiz',    5,    'engineering', 'software engineer',       '2019-04-22'),
+(12, 'sarah kim',      4,    'marketing',   'marketing manager',       '2018-06-01'),
+(13, 'jessica brown',  6,    'engineering', 'software engineer',       '2019-07-30'),
+(14, 'kevin oconnor',  99,   'sales',       'account executive',       '2020-01-05'),
+(15, 'rachel adams',   6,    'engineering', 'software engineer',       '2020-03-18');
