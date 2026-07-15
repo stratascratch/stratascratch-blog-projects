@@ -1,0 +1,22 @@
+-- Creates and populates the daily_sales table used in the
+-- Recursive CTE "Generate Calendar Dates" use case.
+--
+-- Edge cases baked in:
+--   2026-03-01 (range start) has no row at all
+--   2026-03-10 (range end) has no row at all
+--   2026-03-04 through 2026-03-06 are missing together, a 3-day gap
+--   2026-03-07 has an explicit sales_amount = 0.00 -> a real zero-sale day,
+--   distinct from a day missing from the table entirely
+
+DROP TABLE IF EXISTS daily_sales;
+
+CREATE TABLE daily_sales (
+    sale_date     DATE,
+    sales_amount  DECIMAL(10, 2)
+);
+
+INSERT INTO daily_sales (sale_date, sales_amount) VALUES
+('2026-03-02', 450.00),
+('2026-03-03', 320.00),
+('2026-03-07', 0.00),
+('2026-03-08', 275.00);
